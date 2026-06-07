@@ -1,6 +1,47 @@
 <!DOCTYPE html>
 <html>
   <body>
+	  <form id="myForm">
+        <label>Name:</label>
+        <input type="text" id="name" name="name">
+
+        <label>Year:</label>
+        <input type="number" id="year" name="year">
+
+        <button type="submit" id="button">Submit</button>
+    </form>
+
+    <h3 id="url">https://localhost:8080/</h3>
+
+    <script>
+        const form = document.getElementById("myForm");
+        const urlText = document.getElementById("url");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+            const year = document.getElementById("year").value;
+
+            let params = [];
+
+            if (name) {
+                params.push(`name=${encodeURIComponent(name)}`);
+            }
+
+            if (year) {
+                params.push(`year=${encodeURIComponent(year)}`);
+            }
+
+            let url = "https://localhost:8080/";
+
+            if (params.length > 0) {
+                url += "?" + params.join("&");
+            }
+
+            urlText.textContent = url;
+        });
+    </script>
     <script type="text/javascript" src="./script.js">
 </script>
   </body>
